@@ -18,7 +18,7 @@ describe('Authorization route', () => {
             })
             .then(({ body }) => token = body.token)
             .catch(err => {
-                debugger;
+                console.log('thar be an error');
             });
     });
 
@@ -26,6 +26,21 @@ describe('Authorization route', () => {
         it('signs up a user and returns their token', () => {
             assert.ok(token);
         });
+
+        it('Can not sign up with same email', () => {
+            return request
+                .post('/api/auth/signup')
+                .send({ email: 'user', password: 'def' })
+                .then(
+                    () => { throw new Error ('Unexpected successful response');},
+                    err => {
+                        assert.equal(err.status, 400);
+                    }
+                );
+        });
+
+
+
     });
 
 });
