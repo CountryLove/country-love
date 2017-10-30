@@ -1,0 +1,45 @@
+{
+  "name": "country-love",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.2",
+    "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
+    "dotenv": "^4.0.0",
+    "eslint": "^4.10.0",
+    "express": "^4.16.2",
+    "jsonwebtoken": "^8.1.0",
+    "mongoose": "^4.12.5"
+  },
+  "devDependencies": {
+    "mocha": "^4.0.1"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "mocha": "mocha --recursive",
+    "test": "npm run mocha",
+    "test:dev": "nodemon --exec \"npm run mocha\"",
+    "test:unit": "nodemon --exec \"npm run mocha -- ./test/unit\"",
+    "test:e2e": "nodemon --exec \"npm run mocha -- ./test/e2e\"",
+    "start": "node server.js",
+    "start:dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CountryLove/country-love.git"
+  },
+  "author": "David Nishikawa <triptype@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CountryLove/country-love/issues"
+  },
+  "homepage": "https://github.com/CountryLove/country-love#readme"
+}
