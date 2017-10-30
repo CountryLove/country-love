@@ -16,13 +16,23 @@ describe('Authorization route', () => {
                 password: 'abcd',
                 email: 'me@me.com'
             })
-            .then(({ body }) => token = body.token)
-            .catch(err => {
-                console.log('thar be an error');
-            });
+            .then(({ body }) => token = body.token);
     });
 
     describe('signup', () => {
+        let userData = null;
+
+        beforeEach(() => {
+            userData = {
+                name: 'bob',
+                email:  'userdude@people.com',
+                password: 'FUTrump'
+            };
+
+            return request.post('/api/auth/signup')
+                .send(userData);
+        });
+
         it('signs up a user and returns their token', () => {
             assert.ok(token);
         });
@@ -30,7 +40,7 @@ describe('Authorization route', () => {
         it('Can not sign up with same email', () => {
             return request
                 .post('/api/auth/signup')
-                .send({ email: 'user', password: 'def' })
+                .send({ password: userData.password, email: userData.email })
                 .then(
                     () => { throw new Error ('Unexpected successful response');},
                     err => {
@@ -39,8 +49,15 @@ describe('Authorization route', () => {
                 );
         });
 
+    });
 
-
+    it.only('sign in - checks that username and password match and returns token', () => {
+        return request.post('/api/auth/signin')
+            .send({ email: 'othersuer@gmail.com', password: 'nah'})
+            .then(({ body }) => {
+                assert.isOk(body.token);
+            });
+        
     });
 
 });
