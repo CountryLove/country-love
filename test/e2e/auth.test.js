@@ -3,7 +3,7 @@ const assert = require('chai').assert;
 const mongoose = require('mongoose');
 
 describe('Authorization route', () => {
-    beforeEach(() => mongoose.connection.dropDataBase());
+    beforeEach(() => mongoose.connection.dropDatabase());
 
     let token = null;
     beforeEach(() => {
