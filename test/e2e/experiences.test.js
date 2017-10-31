@@ -70,5 +70,12 @@ describe('experience API', () => {
                     });
             });
     });
+
+    it('Deletes an experience', () => {
+        return request.delete(`/api/experiences/${savedExp._id}`)
+            .set({Authorization: token })
+            .then(({ body: status }) => assert.deepEqual(status, { removed: true }));
+
+    });
    
 });
