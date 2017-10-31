@@ -2,48 +2,20 @@ const request = require('./request');
 const assert = require('chai').assert;
 const Country = require('../../lib/models/Country');
 const User = require('../../lib/models/User');
-const { Generator } = require('mockdata-generator');
+const genUsers = require('../../lib/utils/genUsers');
 
 
-describe.only('Country routes', () => {
+describe('Country routes', () => {
 
     before(() => {
-        require('./test-gen');
         if(User.findOne({})) User.collection.drop();
     });
 
     let token = null;
     before(() => {
-        let metaUser = {
-            'name': 'test case',
-            'metadata': [
-                {
-                    'attributeName': 'name',
-                    'dataType': 'Name'
-                },
-                {
-                    'attributeName': 'ipsum',
-                    'dataType': 'Ipsum',
-                    'wordMax': 1
-                }
-            ]
-        };
-        
-        const genUserData = new Generator(metaUser);
-        const userData = genUserData.getValue(1);
-        console.log(userData);
-
-        const purify = arr => arr.join('').split('').filter(char => /\w/.test(char)).join('');
-
-        return request
-            .post('/api/auth/signup')
-            .send({
-                name: userData.name,
-                email: `${purify(userData.ipsum.split(' ').slice(1)).slice(-Math.random() * 10 - 1)}@mail.com`,
-                password: `${purify(userData.ipsum.split(' ').slice(-2))}`,
-                homebase: `${purify(userData.ipsum.split(' ').slice(0, -2)).slice(-7)}`
-            })
-            .then(({body}) => token = body.token);
+        genUsers(1).then(([user]) => {
+            ({token} = user);
+        });
     });
 
     let testCountry = null;
