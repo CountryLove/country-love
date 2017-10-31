@@ -2,7 +2,7 @@ const request = require('./request');
 const assert = require('chai').assert;
 const mongoose = require('mongoose');
 
-describe('Authorization route', () => {
+describe.skip('Authorization route', () => {
     beforeEach(() => mongoose.connection.dropDatabase());
 
     let token = null;
