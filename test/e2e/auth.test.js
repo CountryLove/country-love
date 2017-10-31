@@ -1,12 +1,12 @@
 const request = require('./request');
 const assert = require('chai').assert;
-const mongoose = require('mongoose');
 const auth = require('../../lib/routes/auth'); //eslint-disable-line
 // const db = require('./db');
+const User = require('../../lib/models/User');
 
 
-describe.skip('Authorization route', () => {
-    beforeEach(() => mongoose.connection.dropDatabase());
+describe('Authorization route', () => {
+    beforeEach(() => User.collection.drop());
 
     let token = null;
     let userData = {
@@ -40,16 +40,16 @@ describe.skip('Authorization route', () => {
     });
 
         
-    it.skip('sign in - checks that username and password match and returns token', () => {
+    it('sign in - checks that username and password match and returns token', () => {
         return request
             .post('/api/auth/signin')
             .send({ password: userData.password, email: userData.email })
             .then(({ body }) => {
                 assert.isOk(body.token);
+            })
+            .catch(err => {
+                console.log(err.body); //eslint-disable-line
             });
-        // .catch(err => {
-        //     console.log(err)
-        // });
                 
     });
    
