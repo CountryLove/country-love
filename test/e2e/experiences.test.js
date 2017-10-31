@@ -1,14 +1,14 @@
 const { assert } = require('chai');
 const request = require('./request');
-// const Experience = require('../../lib/models/Experience');
-// const ensureAuth = require('../../lib/utils/ensure-auth');
+const Experience = require('../../lib/models/Experience');
+const User = require('../models/User');
 const tokenService = require('../../lib/utils/token-service');
-// const { Schema } = require('mongoose');
 
 
 describe('experience API', () => {
     
-    // beforeEach(() => Experience.collection.drop());
+    beforeEach(() => Experience.collection.drop());
+    beforeEach(() => User.collection.drop());
 
     let token = '';
     let testUser = {
