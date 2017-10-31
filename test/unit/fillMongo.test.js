@@ -1,6 +1,9 @@
 const fillMon = require('../../lib/utils/fillMongo.js');
 const schematize = require('../../lib/utils/schematize');
+const genUsers = require('../../lib/utils/genUsers');
+
 const Country = require('../../lib/models/Country');
+
 
 const {assert} = require('chai');
 const mongoose = require('mongoose');
@@ -20,7 +23,7 @@ mongoose.connect(testUri, {useMongoClient: true});
  *  - add skip again when db is populated
  */
 
-describe.skip('RUN', () => {
+describe.skip('POPULATE COUNTRIES', () => {
 
     describe('fillMongo', () => {
         it('fills the db with factbook data', () => {
@@ -40,4 +43,13 @@ describe.skip('RUN', () => {
     });
 });
 
+
+describe.skip('POPULATE USERS', () => {
+
+    it('testing genusers: delete later', () => {
+        genUsers(100).then((users) => {
+            console.log(`created ${users.length} users`); // eslint-disable-line
+        });
+    });
+});
 
