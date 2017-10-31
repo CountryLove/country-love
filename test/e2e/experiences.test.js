@@ -1,15 +1,22 @@
 const { assert } = require('chai');
 const request = require('./request');
 const Experience = require('../../lib/models/Experience');
-const User = require('../models/User');
+const User = require('../../lib/models/User');
 const tokenService = require('../../lib/utils/token-service');
 
 
 describe('experience API', () => {
     
-    beforeEach(() => Experience.collection.drop());
-    beforeEach(() => User.collection.drop());
+    before(() => {
+        if(Experience.findOne({})) Experience.collection.drop();
+    });
+    
+    before(() => {
+        if(User.findOne({})) User.collection.drop();
+    });
 
+    
+    let savedExp = null;
     let token = '';
     let testUser = {
         name: 'Persona Peters',
@@ -17,7 +24,7 @@ describe('experience API', () => {
         password: 'personpass'
     };
 
-    beforeEach(() => {
+    before(() => {
         return request
             .post('/api/auth/signup')
             .send(testUser)
@@ -30,7 +37,7 @@ describe('experience API', () => {
             });
     });
 
-    it.only('posts an experience', () => {
+    it('posts an experience', () => {
         return request.post('/api/experiences')
             .set({Authorization: token })
             .send({
@@ -41,4 +48,27 @@ describe('experience API', () => {
             })
             .then(res => assert.ok(res.body._id));
     });
+
+    it('updates experience with id', () => {
+        return request.post('/api/experiences')
+            .set({Authorization: token })
+            .send({
+                country: '59f8a92964922f0d70faf32d',
+                user: testUser._id,
+                comment: 'OMFG tapas!',
+                rating: '5'
+            })
+            .then(res => {
+                savedExp = res.body;
+            })
+            .then(() => {
+                return request.patch(`/api/experiences/${savedExp._id}`)
+                    .set({Authorization: token })
+                    .send({comment: 'Awesome tapas!'})
+                    .then(res => {
+                        assert.equal(res.body.comment,'Awesome tapas!');
+                    });
+            });
+    });
+   
 });
