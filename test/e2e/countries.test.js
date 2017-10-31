@@ -2,7 +2,7 @@ const request = require('./request');
 const assert = require('chai').assert;
 const Country = require('../../lib/models/Country');
 
-// const mongoose = require('mongoose');
+// TODO: add authentication
 
 describe('Country routes', () => {
     let testCountry = null;
