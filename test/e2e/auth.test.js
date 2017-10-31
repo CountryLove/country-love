@@ -4,9 +4,10 @@ const mongoose = require('mongoose');
 const auth = require('../../lib/routes/auth'); //eslint-disable-line
 // const db = require('./db');
 
-describe('Authorization route', () => {
+
+describe.skip('Authorization route', () => {
     beforeEach(() => mongoose.connection.dropDatabase());
-    
+
     let token = null;
     let userData = {
         name: 'Chris',
