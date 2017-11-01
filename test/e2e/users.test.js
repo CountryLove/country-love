@@ -1,7 +1,6 @@
 const request = require('./request');
 const assert = require('chai').assert;
 const tokenService = require('../../lib/utils/token-service');
-const User = require('../../lib/models/User');
 
 describe('Country routes', () => {
     let token = null;
@@ -10,9 +9,6 @@ describe('Country routes', () => {
         email: 'love@countryfact.com',
         password: 'secret'
     };
-    before(() => {
-        if(User.findOne({})) User.collection.drop();
-    });
 
     before(() => {
         return request.post('/api/auth/signup')

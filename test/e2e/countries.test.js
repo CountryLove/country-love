@@ -1,15 +1,10 @@
 const request = require('./request');
 const assert = require('chai').assert;
 const Country = require('../../lib/models/Country');
-const User = require('../../lib/models/User');
 const genUsers = require('../../lib/utils/genUsers');
 
 
 describe('Country routes', () => {
-
-    before(() => {
-        if(User.findOne({})) User.collection.drop();
-    });
 
     let token = null;
     before(() => {

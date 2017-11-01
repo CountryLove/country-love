@@ -1,12 +1,8 @@
 const request = require('./request');
 const assert = require('chai').assert;
 const auth = require('../../lib/routes/auth'); //eslint-disable-line
-// const db = require('./db');
-const User = require('../../lib/models/User');
-
 
 describe('Authorization route', () => {
-    beforeEach(() => User.collection.drop());
 
     let token = null;
     let userData = {

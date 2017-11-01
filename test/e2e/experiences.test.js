@@ -1,20 +1,9 @@
 const { assert } = require('chai');
 const request = require('./request');
-const Experience = require('../../lib/models/Experience');
-const User = require('../../lib/models/User');
 const tokenService = require('../../lib/utils/token-service');
 
 
 describe('experience API', () => {
-    
-    before(() => {
-        if(Experience.findOne({})) Experience.collection.drop();
-    });
-    
-    before(() => {
-        if(User.findOne({})) User.collection.drop();
-    });
-
     
     let savedExp = null;
     let token = '';
@@ -44,7 +33,7 @@ describe('experience API', () => {
                 country: '59f8a92964922f0d70faf32d',
                 user: testUser._id,
                 comment: 'OMFG tapas!',
-                rating: '5'
+                rating: 5
             })
             .then(res => assert.ok(res.body._id));
     });
@@ -56,7 +45,7 @@ describe('experience API', () => {
                 country: '59f8a92964922f0d70faf32d',
                 user: testUser._id,
                 comment: 'OMFG tapas!',
-                rating: '5'
+                rating: 5
             })
             .then(res => {
                 savedExp = res.body;
