@@ -45,10 +45,18 @@ describe.skip('POPULATE COUNTRIES', () => {
 
 
 describe.skip('POPULATE USERS', () => {
-
-    it('testing genusers: delete later', () => {
+    it('fills user collection', () => {
         genUsers(100).then((users) => {
             console.log(`created ${users.length} users`); // eslint-disable-line
+        });
+    });
+});
+
+
+describe.only('POPULATE EXPERIENCES', () => {
+    it('fills experiences collection', () => {
+        genExps(1000).then((expIds) => {
+            assert.ok(expIds);
         });
     });
 });
