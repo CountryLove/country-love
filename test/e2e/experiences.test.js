@@ -1,7 +1,5 @@
 const { assert } = require('chai');
 const request = require('./request');
-const Experience = require('../../lib/models/Experience');
-const User = require('../../lib/models/User');
 const tokenService = require('../../lib/utils/token-service');
 
 

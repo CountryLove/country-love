@@ -1,7 +1,6 @@
 const request = require('./request');
 const assert = require('chai').assert;
 const tokenService = require('../../lib/utils/token-service');
-const User = require('../../lib/models/User');
 
 describe('Country routes', () => {
     let token = null;

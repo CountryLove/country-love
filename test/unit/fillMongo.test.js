@@ -23,44 +23,45 @@ mongoose.connect(testUri, {useMongoClient: true});
  *  - use by unskipping 'RUN' describe function and running npm test ONCE
  *  - add skip again when db is populated
  */
+describe.skip('POPULATE DATABASE', () => {
+    describe('COUNTRIES', () => {
 
-describe.skip('POPULATE COUNTRIES', () => {
-
-    describe('fillMongo', () => {
-        it('fills the db with factbook data', () => {
-            assert.ok(fillMon());
-    
-        });
-    });
-    
-    describe('schematize:     THIS SHOULD FAIL WITH TIMEOUT ERROR', () => {
-        before(() => {
-            if(Country.collection.findOne({})) Country.collection.drop();
-        });
-    
-        it('pulls the database info and puts it into a schema', done => {
-            assert.ok(schematize(done));
-        });
-    });
-});
-
-
-describe.skip('POPULATE USERS', () => {
-    it('fills user collection', () => {
-        genUsers(100).then((users) => {
-            console.log(`created ${users.length} users`); // eslint-disable-line
-        });
-    });
-});
-
-
-describe.skip('POPULATE EXPERIENCES', () => {
-    it('fills experiences collection', done => {
-        genExps(2000)
-            .then((exps) => {
-                assert.ok(exp);
-                done();
+        describe('raw World Factbook data', () => {
+            it('fills countriesRaw collection', () => {
+                assert.ok(fillMon());
+        
             });
+        });
+        
+        describe('countries collection', () => {
+            before(() => {
+                if(Country.collection.findOne({})) Country.collection.drop();
+            });
+        
+            it('populates countries collection via countriesRaw data', done => {
+                assert.ok(schematize(done));
+            });
+        });
+    });
+
+
+    describe('USERS', () => {
+        it('populates users collection', () => {
+            genUsers(100).then((users) => {
+                console.log(`created ${users.length} users`); // eslint-disable-line
+            });
+        });
+    });
+
+
+    describe('EXPERIENCES', () => {
+        it('populates experiences collection', done => {
+            genExps(2000)
+                .then((exps) => {
+                    assert.ok(exps);
+                    done();
+                });
+        });
     });
 });
 
