@@ -23,7 +23,7 @@ mongoose.connect(testUri, {useMongoClient: true});
  *  - use by unskipping 'RUN' describe function and running npm test ONCE
  *  - add skip again when db is populated
  */
-describe('POPULATE DATABASE', () => {
+describe.skip('POPULATE DATABASE', () => {
     describe('COUNTRIES', () => {
 
         describe('raw World Factbook data', () => {
@@ -33,7 +33,7 @@ describe('POPULATE DATABASE', () => {
             });
         });
         
-        describe.only('countries collection', () => {
+        describe('countries collection', () => {
             before(() => {
                 if(Country.collection.findOne({})) Country.collection.drop();
             });
