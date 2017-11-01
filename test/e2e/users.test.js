@@ -10,9 +10,6 @@ describe('Country routes', () => {
         email: 'love@countryfact.com',
         password: 'secret'
     };
-    before(() => {
-        if(User.findOne({})) User.collection.drop();
-    });
 
     before(() => {
         return request.post('/api/auth/signup')

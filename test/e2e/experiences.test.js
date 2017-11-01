@@ -7,15 +7,6 @@ const tokenService = require('../../lib/utils/token-service');
 
 describe('experience API', () => {
     
-    before(() => {
-        if(Experience.findOne({})) Experience.collection.drop();
-    });
-    
-    before(() => {
-        if(User.findOne({})) User.collection.drop();
-    });
-
-    
     let savedExp = null;
     let token = '';
     let testUser = {

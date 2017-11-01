@@ -7,10 +7,6 @@ const genUsers = require('../../lib/utils/genUsers');
 
 describe('Country routes', () => {
 
-    before(() => {
-        if(User.findOne({})) User.collection.drop();
-    });
-
     let token = null;
     before(() => {
         genUsers(1).then(([user]) => {

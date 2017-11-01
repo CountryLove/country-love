@@ -6,7 +6,6 @@ const User = require('../../lib/models/User');
 
 
 describe('Authorization route', () => {
-    beforeEach(() => User.collection.drop());
 
     let token = null;
     let userData = {
