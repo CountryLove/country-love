@@ -180,3 +180,28 @@ db.getCollection('experiences').aggregate([
         }
     },
 ]);
+
+// gets the diff between gender literacy rates
+
+db.getCollection('countries').aggregate(
+    {
+        $project: {
+            _id: false,
+            "name":1,
+            "literacy":1,
+            "literacyGap": {
+                $subtract: [
+                    "$literacy.male",
+                    "$literacy.female"
+                ]
+            }
+        }
+    },
+    {
+        $sort: { "literacyGap": 1 }
+    },
+    {
+        $match: {
+            "literacyGap": { $ne: null } } 
+        }
+    );
