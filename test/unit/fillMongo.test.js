@@ -1,6 +1,7 @@
 const fillMon = require('../../lib/utils/fillMongo.js');
 const schematize = require('../../lib/utils/schematize');
 const genUsers = require('../../lib/utils/genUsers');
+const genExps = require('../../lib/utils/genExps');
 
 const Country = require('../../lib/models/Country');
 
@@ -53,11 +54,13 @@ describe.skip('POPULATE USERS', () => {
 });
 
 
-describe.only('POPULATE EXPERIENCES', () => {
-    it('fills experiences collection', () => {
-        genExps(1000).then((expIds) => {
-            assert.ok(expIds);
-        });
+describe.skip('POPULATE EXPERIENCES', () => {
+    it('fills experiences collection', done => {
+        genExps(2000)
+            .then((exps) => {
+                assert.ok(exp);
+                done();
+            });
     });
 });
 

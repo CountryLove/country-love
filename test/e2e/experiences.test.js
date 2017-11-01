@@ -35,7 +35,7 @@ describe('experience API', () => {
                 country: '59f8a92964922f0d70faf32d',
                 user: testUser._id,
                 comment: 'OMFG tapas!',
-                rating: '5'
+                rating: 5
             })
             .then(res => assert.ok(res.body._id));
     });
@@ -47,7 +47,7 @@ describe('experience API', () => {
                 country: '59f8a92964922f0d70faf32d',
                 user: testUser._id,
                 comment: 'OMFG tapas!',
-                rating: '5'
+                rating: 5
             })
             .then(res => {
                 savedExp = res.body;
