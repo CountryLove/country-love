@@ -1,6 +1,9 @@
 {
   "name": "country-love",
   "version": "1.0.0",
+  "engines": {
+    "node": "8.x.x"
+  },
   "description": "",
   "main": "server.js",
   "directories": {
