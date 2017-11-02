@@ -181,8 +181,9 @@ db.getCollection('experiences').aggregate([
     },
 ]);
 
-// gets the diff between gender literacy rates
 
+
+// gets the diff between gender literacy rate
 db.getCollection('countries').aggregate(
     {
         $project: {
@@ -204,4 +205,144 @@ db.getCollection('countries').aggregate(
         $match: {
             "literacyGap": { $ne: null } } 
         }
-    );
+);
+
+
+
+// gets all languages paired with an array of which countries speak them
+// languages are sorted by number of countries they are spoken in
+// countries per language are sorted by user rating
+db.getCollection('experiences').aggregate([
+        {
+            $lookup : {
+                from : 'countries',
+                localField : 'country',
+                foreignField : '_id',
+                as : 'country'
+            }
+        },
+        {
+            $lookup : {
+                from : 'users',
+                localField : 'user',
+                foreignField : '_id',
+                as : 'user'
+            }
+        },
+        {
+            
+            $project : {
+                rating : true,
+                country : '$country.name',
+                languages : '$country.languages.all',
+                _id : false
+            }
+        },
+        {
+            $project : { 'languages.percentage': false }
+        },
+        {
+            $unwind : '$languages'
+        },
+        {
+        
+            $unwind : '$languages'
+        },
+        {
+            $project : {
+                rating : true,
+                country : true,
+                language : '$languages.language'
+            }
+        },
+        {
+            $unwind : '$country'
+        },
+        {
+            $group : {
+                _id : { country : '$country', language : '$language' },
+                avg_rating : { $avg : '$rating' }
+            }
+        },
+        {
+            $sort : { avg_rating : -1 }
+        },
+        {
+            $group : {
+                _id : { language : '$_id.language' },
+                countries : {
+                    $push : {
+                        country : '$_id.country',
+                        avg_rating : '$avg_rating'
+                    }
+                }
+            }
+        },
+        {
+            $project : {
+                _id : false,
+                language : '$_id.language',
+                countries : '$countries',
+                num : { $size : '$countries' }
+            }
+        },
+        {
+            $sort : { num : -1 }
+        }
+]);
+    {
+        $match : { 'language' : ${queryInput} }
+    }
+
+
+// user's list of countries sorted by trip date
+db.getCollection('experiences').aggregate([
+    {
+        $lookup : {
+            from : 'countries',
+            localField : 'country',
+            foreignField : '_id',
+            as : 'country'
+        }
+    },
+    {
+         $lookup : {
+             from : 'users',
+             localField : 'user',
+             foreignField : '_id',
+             as : 'user'
+         }
+    },
+    {
+        $unwind : '$user'
+    },
+    {
+        $unwind : '$country'  
+    },
+    {
+        $sort : { 'createdAt' : -1 }
+    },
+    {
+        $group : {
+            _id : '$user.name',
+            countries : {
+                $push : {
+                    country : '$country.name',
+                    city : '$city',
+                    date : '$createdAt'
+                }
+            }
+        }
+    },
+    {
+        $project : {
+            _id : false,
+            user : '$_id',
+            count : { $size : '$countries' },
+            countries : true
+        }
+    }
+]); 
+    {
+        $match : { 'user' : ${queryInput} }
+    }
