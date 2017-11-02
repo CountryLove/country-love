@@ -11,7 +11,7 @@ describe('Agg routes', () => {
             });
     });
 
-    it('gets average Ratings of experiences agg', () => {
+    it('gets cuontries with average ratings and # of experiences', () => {
         return request.get('/api/agg/avgRating')
             .then( ({ body }) => {
                 assert.ok(body);

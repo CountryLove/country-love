@@ -203,7 +203,58 @@ db.getCollection('countries').aggregate(
     },
     {
         $match: {
-            "literacyGap": { $ne: null } } 
+            "literacyGap": { $ne: null } 
+        } 
+    }
+    );
+
+    //gets highest levels of child labor
+    db.getCollection('countries').aggregate([{
+        
+               $project: {
+                _id: false,
+                "name":1,
+                "child_labor.percentage":1,
+                
+            }
+        
+        },
+        {
+            $sort: { "child_labor.percentage": 1 }
+        },
+        {
+                $match: {
+                    "child_labor.percentage": { $ne: null } 
+                } 
+          }
+        
+    ])
+
+
+    //by percentage of internet users
+
+    db.getCollection('countries').aggregate([
+        {
+              $match: { 
+                  "internet_users.percentage": {
+                        $lt: 20,
+                        $ne: null
+                   } 
+              }
+        },    
+              
+        {
+            $sort: { "internet_users.percentage": 1 }
+        },
+        
+        {
+            $project: {
+                _id: false,
+                name: 1,
+                "percentage of internet users": "$internet_users.percentage"
+                
+         }
+        
         }
 );
 
