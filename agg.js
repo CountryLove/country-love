@@ -228,3 +228,31 @@ db.getCollection('countries').aggregate(
           }
         
     ])
+
+
+    //by percentage of internet users
+
+    db.getCollection('countries').aggregate([
+        {
+              $match: { 
+                  "internet_users.percentage": {
+                        $lt: 20,
+                        $ne: null
+                   } 
+              }
+        },    
+              
+        {
+            $sort: { "internet_users.percentage": 1 }
+        },
+        
+        {
+            $project: {
+                _id: false,
+                name: 1,
+                "percentage of internet users": "$internet_users.percentage"
+                
+         }
+        
+        }
+    ])
