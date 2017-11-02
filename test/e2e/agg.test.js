@@ -4,8 +4,15 @@ const assert = require('chai').assert;
 
 describe('Agg routes', () => {
 
-    it.only('gets literacyGap agg', () => {
+    it('gets literacyGap agg', () => {
         return request.get('/api/agg/literacy')
+            .then( ({ body }) => {
+                assert.ok(body);
+            });
+    });
+
+    it('gets average Ratings of experiences agg', () => {
+        return request.get('/api/agg/avgRating')
             .then( ({ body }) => {
                 assert.ok(body);
             });
