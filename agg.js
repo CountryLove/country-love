@@ -373,6 +373,38 @@ db.getCollection('experiences').aggregate([
             countries: true
         }
     }
-]); // {
+]); 
+
+    // {
     //     $match : { 'user' : ${queryInput} }
     // }
+// top rated by lifeExpectancy
+aggregate([
+    
+     {
+         $lookup : {
+             from : "countries",
+             localField : "country",
+             foreignField : "_id",
+             as : "country"
+         }
+     },
+     {
+         $group : {
+             _id : { country: "$country.name",
+                     "Life Expectancy": "$country.life_expectancy"},
+             avg_rating : { $avg : "$rating" }
+         }
+     },
+     
+    {
+         $sort: { avg_rating: -1}
+     },
+     {
+         $project: { 
+             _id: true,
+             "country.name": 1,
+             "Life Expectancy": 1
+             }
+      }
+ ]);
