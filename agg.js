@@ -256,7 +256,7 @@ db.getCollection('countries').aggregate(
          }
         
         }
-);
+    ]);
 
 
 
@@ -341,9 +341,9 @@ db.getCollection('experiences').aggregate([
             $sort : { num : -1 }
         }
 ]);
-    {
-        $match : { 'language' : ${queryInput} }
-    }
+    // {
+    //     $match : { 'language' : ${queryInput} }
+    // }
 
 
 // user's list of countries sorted by trip date
@@ -394,6 +394,6 @@ db.getCollection('experiences').aggregate([
         }
     }
 ]); 
-    {
-        $match : { 'user' : ${queryInput} }
-    }
+    // {
+    //     $match : { 'user' : ${queryInput} }
+    // }
