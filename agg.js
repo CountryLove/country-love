@@ -202,6 +202,29 @@ db.getCollection('countries').aggregate(
     },
     {
         $match: {
-            "literacyGap": { $ne: null } } 
-        }
+            "literacyGap": { $ne: null } 
+        } 
+    }
     );
+
+    //gets highest levels of child labor
+    db.getCollection('countries').aggregate([{
+        
+               $project: {
+                _id: false,
+                "name":1,
+                "child_labor.percentage":1,
+                
+            }
+        
+        },
+        {
+            $sort: { "child_labor.percentage": 1 }
+        },
+        {
+                $match: {
+                    "child_labor.percentage": { $ne: null } 
+                } 
+          }
+        
+    ])
