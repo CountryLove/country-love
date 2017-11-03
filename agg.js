@@ -408,3 +408,119 @@ aggregate([
              }
       }
  ]);
+
+
+// find all countries with given tag sorted by count
+db.getCollection('experiences').aggregate([
+    {
+        $lookup : {
+            from : 'countries',
+            localField : 'country',
+            foreignField : '_id',
+            as : 'country'
+        }
+    },
+    {
+        $unwind : '$tags'
+    },
+    {
+        $group : {
+            _id : {
+                tag : '$tags',
+                country : '$country.name'
+            },
+            count : {
+                $sum : 1
+            }
+        }
+    },
+    {
+        $sort : {
+            'count' : -1
+        }
+    },
+    {
+        $group : {
+            _id : '$_id.tag',
+            total_count : {
+                $sum : '$count'
+            },
+            countries : {
+                $push : {
+                    name : '$_id.country',
+                    count : '$count'
+                },
+            },
+            
+        }
+    },
+    {
+        $sort : {
+            'total_count' : -1
+        }
+    },
+    {
+        $project : {
+            _id : false,
+            tag : '$_id',
+            total_count : true,
+            countries : true
+        }
+    },
+    {
+        $match : {
+            'tag' : 'food'
+        }
+    }
+]);
+
+// gets all tags (and their counts) associated with a country
+db.getCollection('experiences').aggregate([
+    {
+        $lookup : {
+            from : 'countries',
+            localField : 'country',
+            foreignField : '_id',
+            as : 'country'
+        }
+    },
+    {
+        $unwind : '$tags'
+    },
+    {
+        $group : {
+            _id : {
+                tag : '$tags',
+                country : '$country.name'
+            },
+            count : {
+                $sum : 1
+            }
+        }
+    },
+    {
+        $group : {
+            _id : '$_id.country',
+            tags : {
+                $push : {
+                    tag: '$_id.tag',
+                    count: '$count'
+                }
+            },
+            total_count : {
+                $sum : '$count'
+            }
+        }
+    },
+    {
+        $project : {
+            _id : false,
+            country : '$_id',
+            tags : true,
+            total_count : true
+        }
+    },
+    {
+        $unwind : '$country'
+    }
+    ]);
