@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head> 
+<script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script> 
+<script type="text/javascript">
+function renderChart(chartData) {
+    var chart = new CanvasJS.Chart('chartContainer', { 
+        title: {
+            text: 'Life Expectancy by Mother\'s Age at First Birth'
+        },
+        data: [
+            {
+                type: "column",
+                dataPoints: chartData
+            }
+        ]
+    });
+    chart.render();	    
+}
+
+$.get('/api/agg/lifeExpectancy')
+    .then(results =>{
+        renderChart(results.map(item => {
+            return {
+                y: item.life_expectancy,
+                label: item.country + " (" + item.mothers_age_first_birth + ")"
+            }
+        }));
+    });
+</script>
+</head>  
+<body>  
+<div id="chartContainer" style="width:100%; height:100%"></div>  
+</body>
+</html>
