@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Experiences</title>
+
+        <link href="https://fonts.googleapis.com/css?family=Caveat:700" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Berkshire+Swash|Patrick+Hand" rel="stylesheet">        
+        <link href='./styles/user-experiences.css' rel='stylesheet'>
+        <script id="country-option-template" type="text/x-handlebars-template">
+            <option class="clearfix" value="{{_id}}">{{name}}</option>
+        </script>
+        <script id="experience-log-template" type="text/x-handlebars-template">
+            <article class="clearfix experience-article">
+                <h3>{{#if city}}{{city}}, {{/if}}{{country}}</h3>
+                <div class="date-n-rating">
+                    <p>Date: {{date}}</p>
+                    <p>Rating: {{rating}}/5</p>
+                </div>
+                <ul class='tag-list'>
+                    <li>Tags:   </li>
+                    {{#each tags}}
+                        <li>{{this}}</li>
+                    {{/each}}
+                </ul>
+                <p class='comment'>{{comment}}</p>
+            </article>
+        </script>
+    </head>
+    <body>
+        <header>
+            <h1>Your Experiences</h1>
+        </header>
+        <div id='user-exps-div'>
+        </div>
+        
+        <a href='./index.html' class='homelink'><h4>Return to Home</h4></a>
+        <div id='new-experience-form'>
+            <h3>Log a new experience!</h3>
+            
+            <div>  
+                <form id="user-input" action="">
+                    <!-- user title -->
+                    <select name="country-input" id="country-input" required>
+                        <option value=""disabled selected>Country</option>
+                    </select>
+
+                    <!-- user rating -->
+                    <select name="rating-input" id="rating-input" required>
+                        <option value="" disabled selected>Rating</option>
+                        <option value="5">5: Amazing!</option>
+                        <option value="4">4: Great!</option>
+                        <option value="3">3: Pretty Cool</option>
+                        <option value="2">2: Eh...</option>
+                        <option value="1">1: FUBAR</option>
+                    </select>
+
+                    <!-- first name -->
+                    <input type="text" id="city-input" placeholder="City"></input>
+            
+                    <!-- last name -->
+                    <input type="text" id="tags-input" placeholder="Tags (separate by spaces)"></input>
+            
+                    <!-- message -->
+                    <textarea type="text" id="comment-input" placeholder="Comment"></textarea>
+            
+                    <!-- <CTA></CTA> -->
+                    <input type="submit" value="Submit"></form>
+            </div>
+        </div>
+    </body>
+    <script
+    src="https://code.jquery.com/jquery-3.2.1.min.js"
+    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js' type='text/javascript'></script>
+    <script src='./scripts/user-experiences.js' type='text/javascript'></script>
+</html>

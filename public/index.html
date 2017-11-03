@@ -2,28 +2,38 @@
 <html>
     <head>
         <title>Country Love</title>
+        <link href="https://fonts.googleapis.com/css?family=Berkshire+Swash|Patrick+Hand" rel="stylesheet">
         <link href='./styles/index.css' rel='stylesheet'>
     </head>
     <body>
-        <h1>Country Love</h1>
-
-        <div id='links'>
-            <h3>User Links</h3>
-            <ul>
-                <a href='./sign-up.html'><li>Sign Up</li></a>
-                <a href='./sign-in.html'><li>Sign In</li></a>
-            </ul>
-            <h3>Aggregation Links</h3>
-            <ul>
-                <a href='./avg-rating.html'><li>country average ratings</li></a>
-                <a href='./country-pops.html'><li>country populations</li></a>
-                <a href='./literacy-gap.html'><li>literacy gap</li></a>
-                <a href='./child-labor.html'><li>child labor stats</li></a>
-                <a href='./internet-users.html'><li>internet user stats</li></a>
-                <a href='./life-expectancy.html'><li>life expectancy stats</li></a>
-                <a href='./language.html'><li>contries by language</li></a>
-            </ul>
+        <div id='main'>
+            <h1>Country Love</h1>
+    
+            <div id='links'>
+                <h3>User Links</h3>
+                <ul>
+                    <a href='./sign-up.html' class='login-link'><li>Sign Up</li></a>
+                    <a href='./sign-in.html' class='login-link'><li>Sign In</li></a>
+                    <a href='./user-experiences.html' class='restricted-link hidden'><li>Experiences</li></a>
+                    <a href='./' id='logout-link' class='restricted-link hidden'><li>Log Out</li></a>
+                </ul>
+                <h3>Aggregation Links</h3>
+                <ul id='aggregation-links'>
+                    <a href='./avg-rating.html' class='sample-aggregation'><li>country average ratings</li></a>
+                    <a href='./country-pops.html' class='sample-aggregation'><li>country populations</li></a>
+                    <a href='./literacy-gap.html' class='sample-aggregation'><li>literacy gap</li></a>
+                    <a href='./child-labor.html'><li>child labor stats</li></a>
+                    <a href='./internet-users.html'><li>internet user stats</li></a>
+                    <a href='./life-expectancy.html'><li>life expectancy stats</li></a>
+                    <a href='./language.html'><li>countries by language</li></a>
+                </ul>
+            </div>
         </div>
     </body>
+    <script
+    src="https://code.jquery.com/jquery-3.2.1.min.js"
+    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
     <script src='./scripts/index.js' type='text/javascript'></script>
+
 </html>
