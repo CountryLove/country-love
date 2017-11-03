@@ -1,19 +1,33 @@
 html, body {
-    color: darkblue
+    color: #232357;
     display: block;
-    width: 60%;
-    margin: 2em auto;
-    text-align: center
+    width: 17em;
+    margin: 1em auto;
+    text-align: center;
+    font-family: 'Patrick Hand', cursive;
+}
+
+header, h1 {
+    font-family: 'Berkshire Swash', cursive;
+}
+    
+#main {
+    height: 100%;
+    width: 100%;
+    padding: 1.5em;
+    background: rgba(0, 182, 255, 0.14);
+    border: 3px;
+    border-radius: 1.5em;
 }
 
 h1{
     padding-bottom: 1.2em;
     margin-bottom: 1.25em;    
-    border-bottom: 5px double rgba(90, 115, 199, 0.55)
+    border-bottom: 5px double rgba(90, 115, 199, 0.55);
 }
 
 h3 {
-    margin: 0 3em;
+    margin: 0 2em;
     margin-top: 2em;
     margin-bottom: 0;
     padding-bottom: 1em;
@@ -23,6 +37,8 @@ h3 {
 ul {
     list-style: none;
     padding: 0;
+    margin-top: 0.5em;
+    
 }
 
 ul li {

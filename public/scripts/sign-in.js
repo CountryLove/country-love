@@ -4,8 +4,9 @@
 const global = this;
 
 const tokenManager = {
-    store: (token) => {
+    store: (token, email) => {
         sessionStorage.setItem('thing', token);
+        sessionStorage.setItem('email', email);
     },
     retrieve: () => {
         return sessionStorage.getItem('thing');
@@ -28,7 +29,7 @@ $('#signin-form').submit( function(event) {
         contentType: 'application/json; charset=utf-8',
         datatype: 'json',
         success: res => {
-            tokenManager.store(res.token);
+            tokenManager.store(res.token, data.email);
             global.location = '/';
         },
         error: err => {

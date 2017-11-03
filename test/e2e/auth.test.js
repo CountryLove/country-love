@@ -1,17 +1,20 @@
 const request = require('./request');
 const assert = require('chai').assert;
 const auth = require('../../lib/routes/auth'); //eslint-disable-line
+const faker = require('faker');
 
 describe('Authorization route', () => {
+
+    let uniquifier = faker.name.firstName();
 
     let token = null;
     let userData = {
         name: 'Chris',
         password: 'abcd',
-        email: 'me@me.com'
+        email: `${uniquifier}@${faker.name.lastName()}.com`
     };
 
-    beforeEach(() => {
+    before(() => {
         return request
             .post('/api/auth/signup')
             .send(userData)
@@ -30,13 +33,15 @@ describe('Authorization route', () => {
             .then(
                 () => { throw new Error ('Unexpected successful response');},
                 err => {
-                    assert.equal(err.status, 400);
+                    assert.equal(err.status, 404);
                 }
             );
     });
 
         
     it('sign in - checks that username and password match and returns token', () => {
+        userData.email = `${uniquifier}@${faker.name.lastName()}.com`;
+        
         return request
             .post('/api/auth/signin')
             .send({ password: userData.password, email: userData.email })

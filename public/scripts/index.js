@@ -17,7 +17,6 @@ $(document).ready(function() {
         $signin.hide();
         $restrictedLinks.show();
         $aggregationLinks.show();
-
     }
 
     $restrictedLinks.click(function(event) {

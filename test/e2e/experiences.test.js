@@ -1,15 +1,19 @@
 const { assert } = require('chai');
 const request = require('./request');
 const tokenService = require('../../lib/utils/token-service');
+const faker = require('faker');
 
 
 describe('experience API', () => {
     
+
+    let uniquifier = faker.name.firstName();
+
     let savedExp = null;
     let token = '';
     let testUser = {
         name: 'Persona Peters',
-        email: 'person@email.com', 
+        email: `${uniquifier}@${faker.name.lastName()}.com`, 
         password: 'personpass'
     };
 

@@ -4,8 +4,9 @@
 const global = this;
 
 const tokenManager = {
-    store: (token) => {
-        sessionStorage.setItem('thing', JSON.stringify(token));
+    store: (token, email) => {
+        sessionStorage.setItem('thing', token);
+        sessionStorage.setItem('email', email);
     },
     retrieve: () => {
         return JSON.parse(sessionStorage.getItem('thing'));
@@ -30,11 +31,12 @@ $('#signup-form').submit( function(event) {
         contentType: 'application/json; charset=utf-8',
         datatype: 'json',
         success: res => {
-            tokenManager.store(res);
+            tokenManager.store(res.token, data.email);
             global.location = '/';
         },
         error: err => {
-            if(err.status === 400) $('#signup-email').val('Email invalid or already in use.');
+            if(err.status === 400) $('#signup-email').val('Email invalid.');
+            else if(err.status === 404) $('#signup-email').val('Email is already in use.')
         }
     });
 
