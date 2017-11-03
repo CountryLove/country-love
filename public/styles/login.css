@@ -82,7 +82,7 @@ body {
     appearance: none;
     margin: 1em auto 0.2em auto;    
     opacity: .99;
-    width:120px;
+    width:129px;
     background: #08c;
     box-shadow: inset 0 1px 2px rgba(255,255,255, .35), 0px 1px 6px rgba(0,246,255,.5);
     border: 1px solid #0a5378;
@@ -95,7 +95,7 @@ body {
   input[type="submit"]:hover {
     background: #08c;
     margin: 1em auto 0.2em auto;
-    width:120px;
+    width:129px;
     border: 1px solid #0a5378;
     border-radius: 3px;
     box-shadow: inset 0px 3px 16px rgba(0,0,0,.25),0px 1px 10px rgba(255,255,255,.5),inset 0px -1px 2px rgba(255,255,255,.35);
