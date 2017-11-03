@@ -32,7 +32,9 @@ $('#signup-form').submit( function(event) {
         success: res => {
             tokenManager.store(res);
             global.location = '/';
-
+        },
+        error: err => {
+            if(err.status === 400) $('#signup-email').val('Email invalid or already in use.');
         }
     });
 
