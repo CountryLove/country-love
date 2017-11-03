@@ -7,11 +7,11 @@
 function renderChart(chartData) {
     var chart = new CanvasJS.Chart('chartContainer', { 
         title: {
-            text: 'Literacy Gap Between Male and Female Populations'
+            text: 'Languages by Number of Countries Where Spoken'
         },
         data: [
             {
-                type: "column",
+                type: "pie",
                 dataPoints: chartData
             }
         ]
@@ -19,14 +19,18 @@ function renderChart(chartData) {
     chart.render();	    
 }
 
-$.get('/api/agg/literacy')
+$.get('/api/agg/countriesByLang')
     .then(results =>{
-        renderChart(results.map(item => {
-            return {
-                y: item.literacyGap,
-                label: item.name + "  (avg: "  + item.literacy.total + "%)"
-            }
-        }));
+        renderChart(
+            results
+                .map(item => {
+                    return {
+                        y: item.num,
+                        label: item.language
+                    }
+                })
+                // .splice(0, 24)
+        );
     });
 </script>
 </head>  
