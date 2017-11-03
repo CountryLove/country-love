@@ -1,19 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head> 
-        <link href='./styles/all.css' rel='stylesheet'>
-        
 <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script> 
 <script type="text/javascript">
 function renderChart(chartData) {
     var chart = new CanvasJS.Chart('chartContainer', { 
         title: {
-            text: 'Literacy Gap Between Male and Female Populations'
+            text: 'Languages by Number of Countries Where Spoken'
         },
         data: [
             {
-                type: "column",
+                type: "pie",
                 dataPoints: chartData
             }
         ]
@@ -21,19 +19,22 @@ function renderChart(chartData) {
     chart.render();	    
 }
 
-$.get('/api/agg/literacy')
+$.get('/api/agg/countriesByLang')
     .then(results =>{
-        renderChart(results.map(item => {
-            return {
-                y: item.literacyGap,
-                label: item.name + "  (avg: "  + item.literacy.total + "%)"
-            }
-        }));
+        renderChart(
+            results
+                .map(item => {
+                    return {
+                        y: item.num,
+                        label: item.language
+                    }
+                })
+                // .splice(0, 24)
+        );
     });
 </script>
 </head>  
 <body>  
-<div id="chartContainer" style="width:100%; height:100%"></div> 
-<a href='./index.html' class='homelink'><h4>Return to Home</h4></a> 
+<div id="chartContainer" style="width:100%; height:100%"></div>  
 </body>
 </html>
