@@ -1,4 +1,4 @@
-/* globals $ alert */
+/* globals $ sessionStorage */
 /// <reference path="../typings/tsd.d.ts" />
 
 const global = this;

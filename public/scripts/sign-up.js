@@ -1,4 +1,5 @@
-/* globals $ alert */
+/* globals $ sessionStorage */
+
 /// <reference path="../typings/tsd.d.ts" />
 
 const global = this;
@@ -36,7 +37,7 @@ $('#signup-form').submit( function(event) {
         },
         error: err => {
             if(err.status === 400) $('#signup-email').val('Email invalid.');
-            else if(err.status === 404) $('#signup-email').val('Email is already in use.')
+            else if(err.status === 404) $('#signup-email').val('Email is already in use.');
         }
     });
 

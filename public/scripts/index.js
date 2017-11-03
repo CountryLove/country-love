@@ -1,4 +1,4 @@
-/* globals $ alert */
+/* globals $ document sessionStorage  */
 /// <reference path="../typings/tsd.d.ts" />
 
 
@@ -19,7 +19,7 @@ $(document).ready(function() {
         $aggregationLinks.show();
     }
 
-    $restrictedLinks.click(function(event) {
+    $restrictedLinks.click(function() {
         if(!validUser) return false;
     });
     $logout.click(function() {
