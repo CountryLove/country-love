@@ -1,4 +1,4 @@
-/* globals $ alert */
+/* globals $ sessionStorage Handlebars */
 /// <reference path="../typings/tsd.d.ts" />
 
 
@@ -13,7 +13,6 @@ function updateExps() {
         type: 'GET',
         url: `/api/agg/userExpLogAuto?email=${sessionStorage.getItem('email')}`,
         success: res => {
-            console.log(res[0].countries)
             let template = Handlebars.compile($('#experience-log-template').text());            
             res[0].countries.forEach(exp => $expDiv.append(template(exp)));
         }
@@ -36,7 +35,7 @@ $(() => {
         }
     });
 
-    updateExps()
+    updateExps();
 
     $('#user-input').submit(function(event) {
         event.preventDefault();
@@ -57,7 +56,7 @@ $(() => {
             datatype: 'json',
             success: updateExps,
             error: err => {
-                console.log(err);
+                console.log(err); // eslint-disable-line
             }
         });
     });
