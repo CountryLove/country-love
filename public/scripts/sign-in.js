@@ -5,10 +5,10 @@ const global = this;
 
 const tokenManager = {
     store: (token) => {
-        sessionStorage.setItem('token', JSON.stringify(token));
+        sessionStorage.setItem('thing', token);
     },
     retrieve: () => {
-        return JSON.parse(sessionStorage.getItem('token'));
+        return sessionStorage.getItem('thing');
     }
 };
 
@@ -28,8 +28,7 @@ $('#signin-form').submit( function(event) {
         contentType: 'application/json; charset=utf-8',
         datatype: 'json',
         success: res => {
-            console.log(res);
-            console.log(tokenManager.retrieve());
+            tokenManager.store(res.token);
             global.location = '/';
         },
         error: err => {

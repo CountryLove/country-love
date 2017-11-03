@@ -5,10 +5,10 @@ const global = this;
 
 const tokenManager = {
     store: (token) => {
-        sessionStorage.setItem('token', JSON.stringify(token));
+        sessionStorage.setItem('thing', JSON.stringify(token));
     },
     retrieve: () => {
-        return JSON.parse(sessionStorage.getItem('token'));
+        return JSON.parse(sessionStorage.getItem('thing'));
     }
 };
 
