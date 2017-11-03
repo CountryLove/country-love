@@ -45,4 +45,18 @@ describe.only('Agg routes', () => {
                 assert.ok(body);
             });
     });
+            
+    it('returns user\'s experience log', () => {
+        return request.get('/api/agg/userExperienceLog?username=Sam Hood')
+            .then( ({ body }) => {
+                assert.ok(body);
+            });
+    });
+    
+    it('returns a sample of the collection data', () => {
+        return request.get('/api/agg/sample?quantity=1')
+            .then( ({ body }) => {
+                assert.ok(body);
+            });
+    });
 });
