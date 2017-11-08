@@ -24,7 +24,8 @@ describe('Country routes', () => {
     it('gets all the countries', () => {
         return request.get('/api/countries')
             .then(({ body }) => {
-                assert.ok(body.length, 222);
+                // i think you mean equal, not ok. (with ok, 222 is error message)
+                assert.equal(body.length, 222);
             });
     });
 

@@ -2,6 +2,9 @@ const request = require('./request');
 const assert = require('chai').assert;
 // const agg = require('./routes/agg');
 
+// You should add a bit more than just `assert.ok(body)`, for
+// example check that a key aggregation field as a value
+
 describe('Agg routes', () => {
 
     it('gets literacyGap agg', () => {
