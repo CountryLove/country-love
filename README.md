@@ -1,5 +1,7 @@
 # COUNTRY LOVE
-	
+
+**Should include instructions for how to load data**
+
 ## COLLECTION: 
 	* Countries
 		- Data from WorldFactBook
